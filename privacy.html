@@ -91,16 +91,22 @@
 
     function currentLocale() {
       const params = new URLSearchParams(window.location.search);
-      return normalizeLocale(params.get("lang") || localStorage.getItem(STORAGE_KEY) || navigator.language);
+      const requestedLocale = params.get("lang");
+      if (requestedLocale) {
+        const cleanUrl = `${window.location.pathname}${window.location.hash}`;
+        history.replaceState(null, "", cleanUrl);
+        return normalizeLocale(requestedLocale);
+      }
+      return normalizeLocale(localStorage.getItem(STORAGE_KEY) || navigator.language);
     }
 
-    function setInternalLinks(locale) {
+    function setInternalLinks() {
       document.querySelectorAll("a[data-page]").forEach(link => {
-        link.href = `${link.dataset.page}?lang=${encodeURIComponent(locale)}`;
+        link.href = link.dataset.page;
       });
     }
 
-    function applyLocale(locale, updateUrl) {
+    function applyLocale(locale) {
       const code = normalizeLocale(locale);
       const group = GROUPS[code] || "ja";
       const dict = Object.assign({}, SHARED.ja, TEXT.ja, SHARED[group] || {}, TEXT[group] || {});
@@ -113,13 +119,8 @@
       });
       const select = document.getElementById("language-select");
       if (select) select.value = code;
-      setInternalLinks(code);
+      setInternalLinks();
       localStorage.setItem(STORAGE_KEY, code);
-      if (updateUrl) {
-        const url = new URL(window.location.href);
-        url.searchParams.set("lang", code);
-        history.replaceState(null, "", url);
-      }
     }
 
     function setupLanguageSelect() {
@@ -130,11 +131,11 @@
         option.textContent = item.label;
         select.appendChild(option);
       });
-      select.addEventListener("change", event => applyLocale(event.target.value, true));
+      select.addEventListener("change", event => applyLocale(event.target.value));
     }
 
     setupLanguageSelect();
-    applyLocale(currentLocale(), !new URLSearchParams(window.location.search).get("lang"));
+    applyLocale(currentLocale());
   </script>
 </body>
 </html>
