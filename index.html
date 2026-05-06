@@ -1,49 +1,127 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja-JP">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>わかってくんカード</title>
   <style>
-    :root { color-scheme: light dark; --accent: #0a84ff; --border: #d6d6d6; }
+    :root { color-scheme: light dark; --accent: #0a84ff; --border: #d6d6d6; --muted: color-mix(in srgb, CanvasText 68%, transparent); }
     body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans", sans-serif; line-height: 1.75; color: CanvasText; background: Canvas; }
-    main { max-width: 760px; margin: 0 auto; padding: 48px 20px; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 20px 48px; }
     header { margin-bottom: 32px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .home-link { color: var(--accent); text-decoration: none; font-weight: 700; }
+    .language-control { display: flex; align-items: center; gap: 8px; font-size: .94rem; color: var(--muted); }
+    select { max-width: 240px; font: inherit; color: CanvasText; background: Canvas; border: 1px solid var(--border); border-radius: 10px; padding: 7px 10px; }
     h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 12px; }
-    h2 { font-size: 1.25rem; margin: 32px 0 8px; }
-    p { margin: 0 0 16px; }
+    h2 { font-size: 1.25rem; margin: 0 0 8px; }
+    p, li { margin-bottom: 12px; }
     nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    a { color: var(--accent); }
     a.button { color: white; background: var(--accent); text-decoration: none; padding: 10px 14px; border-radius: 10px; font-weight: 700; }
-    a.link { color: var(--accent); }
     .card { border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-top: 20px; }
     footer { margin-top: 40px; font-size: .9rem; opacity: .72; }
+    html[dir="rtl"] .topbar { flex-direction: row-reverse; }
+    @media (max-width: 560px) { .topbar { align-items: flex-start; flex-direction: column; } html[dir="rtl"] .topbar { flex-direction: column; } select { max-width: 100%; } }
   </style>
 </head>
 <body>
   <main>
+    <div class="topbar">
+      <span></span>
+      <label class="language-control"><span data-i18n="languageLabel">言語</span><select id="language-select" aria-label="Language"></select></label>
+    </div>
     <header>
-      <h1>わかってくんカード</h1>
-      <p>聞こえにくい時や声で伝えにくい時に、相手へ見せるための会話カードをすばやく表示できるアプリです。</p>
-      <nav aria-label="ページ内リンク">
-        <a class="button" href="support.html">サポート</a>
-        <a class="button" href="privacy.html">プライバシーポリシー</a>
+      <h1 data-i18n="appName">わかってくんカード</h1>
+      <p data-i18n="lead">聞こえにくい時や声で伝えにくい時に、相手へ見せるための会話カードをすばやく表示できるアプリです。</p>
+      <nav aria-label="Pages">
+        <a class="button" href="support.html" data-page="support.html" data-i18n="support">サポート</a>
+        <a class="button" href="privacy.html" data-page="privacy.html" data-i18n="privacy">プライバシーポリシー</a>
       </nav>
     </header>
 
     <section class="card">
-      <h2>主な機能</h2>
-      <p>緊急、病院、薬局、買い物、交通などの場面に合わせた定型文を表示できます。自由入力や音声認識を使って、その場で必要な内容を大きく見せることもできます。</p>
-      <p>プレミアム機能を購入すると、お気に入り登録とカテゴリ内の並び替えを利用できます。</p>
+      <h2 data-i18n="featuresTitle">主な機能</h2>
+      <p data-i18n="features1">緊急、病院、薬局、買い物、交通などの場面に合わせた定型文を表示できます。自由入力や音声認識を使って、その場で必要な内容を大きく見せることもできます。</p>
+      <p data-i18n="features2">プレミアム機能を購入すると、お気に入り登録とカテゴリ内の並び替えを利用できます。</p>
     </section>
 
     <section class="card">
-      <h2>サポートとプライバシー</h2>
-      <p>使い方や不具合の相談は <a class="link" href="support.html">サポート</a> をご確認ください。データの扱いは <a class="link" href="privacy.html">プライバシーポリシー</a> に記載しています。</p>
+      <h2 data-i18n="linksTitle">サポートとプライバシー</h2>
+      <p data-i18n="linksText">使い方、不具合、データの扱いについては、サポートページとプライバシーポリシーをご確認ください。</p>
+      <nav aria-label="Related pages">
+        <a class="button" href="support.html" data-page="support.html" data-i18n="support">サポート</a>
+        <a class="button" href="privacy.html" data-page="privacy.html" data-i18n="privacy">プライバシーポリシー</a>
+      </nav>
     </section>
 
     <footer>
-      <p>&copy; 2026 わかってくんカード</p>
+      <p data-i18n="copyright">© 2026 わかってくんカード</p>
     </footer>
   </main>
+  <script>
+    const LOCALES = [{"code": "ja-JP", "label": "日本語"}, {"code": "en-US", "label": "English (United States)"}, {"code": "en-GB", "label": "English (United Kingdom)"}, {"code": "en-AU", "label": "English (Australia)"}, {"code": "en-CA", "label": "English (Canada)"}, {"code": "en-IN", "label": "English (India)"}, {"code": "en-SG", "label": "English (Singapore)"}, {"code": "de-DE", "label": "Deutsch (Deutschland)"}, {"code": "es-ES", "label": "Español (España)"}, {"code": "es-MX", "label": "Español (México)"}, {"code": "es-US", "label": "Español (Estados Unidos)"}, {"code": "fr-FR", "label": "Français (France)"}, {"code": "it-IT", "label": "Italiano (Italia)"}, {"code": "ko-KR", "label": "한국어 (대한민국)"}, {"code": "ru-RU", "label": "Русский (Россия)"}, {"code": "tr-TR", "label": "Türkçe (Türkiye)"}, {"code": "yue-CN", "label": "粵語（中國大陸）"}, {"code": "zh-CN", "label": "简体中文（中国大陆）"}, {"code": "zh-HK", "label": "繁體中文（香港）"}, {"code": "zh-TW", "label": "繁體中文（台灣）"}, {"code": "ar-SA", "label": "العربية (السعودية)"}];
+    const GROUPS = {"ja-JP": "ja", "en-US": "en", "en-GB": "en", "en-AU": "en", "en-CA": "en", "en-IN": "en", "en-SG": "en", "de-DE": "de", "es-ES": "es", "es-MX": "es", "es-US": "es", "fr-FR": "fr", "it-IT": "it", "ko-KR": "ko", "ru-RU": "ru", "tr-TR": "tr", "yue-CN": "yue", "zh-CN": "zhHans", "zh-HK": "zhHant", "zh-TW": "zhHant", "ar-SA": "ar"};
+    const SHARED = {"ja": {"appName": "わかってくんカード", "languageLabel": "言語", "home": "トップ", "support": "サポート", "privacy": "プライバシーポリシー", "copyright": "© 2026 わかってくんカード"}, "en": {"appName": "Comm Wakatte-kun Card", "languageLabel": "Language", "home": "Home", "support": "Support", "privacy": "Privacy Policy", "copyright": "© 2026 Comm Wakatte-kun Card"}, "de": {"appName": "Comm Wakatte-kun Karte", "languageLabel": "Sprache", "home": "Startseite", "support": "Support", "privacy": "Datenschutzerklärung", "copyright": "© 2026 Comm Wakatte-kun Karte"}, "es": {"appName": "Comm Wakatte-kun Card", "languageLabel": "Idioma", "home": "Inicio", "support": "Soporte", "privacy": "Política de privacidad", "copyright": "© 2026 Comm Wakatte-kun Card"}, "fr": {"appName": "Comm Wakatte-kun Card", "languageLabel": "Langue", "home": "Accueil", "support": "Assistance", "privacy": "Politique de confidentialité", "copyright": "© 2026 Comm Wakatte-kun Card"}, "it": {"appName": "Comm Wakatte-kun Card", "languageLabel": "Lingua", "home": "Home", "support": "Supporto", "privacy": "Informativa sulla privacy", "copyright": "© 2026 Comm Wakatte-kun Card"}, "ko": {"appName": "Comm Wakatte-kun 카드", "languageLabel": "언어", "home": "홈", "support": "지원", "privacy": "개인정보 처리방침", "copyright": "© 2026 Comm Wakatte-kun 카드"}, "ru": {"appName": "Карточка Comm Wakatte-kun", "languageLabel": "Язык", "home": "Главная", "support": "Поддержка", "privacy": "Политика конфиденциальности", "copyright": "© 2026 Карточка Comm Wakatte-kun"}, "tr": {"appName": "Comm Wakatte-kun Kartı", "languageLabel": "Dil", "home": "Ana sayfa", "support": "Destek", "privacy": "Gizlilik Politikası", "copyright": "© 2026 Comm Wakatte-kun Kartı"}, "yue": {"appName": "Comm Wakatte-kun 卡片", "languageLabel": "語言", "home": "主頁", "support": "支援", "privacy": "私隱政策", "copyright": "© 2026 Comm Wakatte-kun 卡片"}, "zhHans": {"appName": "Comm Wakatte-kun 卡片", "languageLabel": "语言", "home": "首页", "support": "支持", "privacy": "隐私政策", "copyright": "© 2026 Comm Wakatte-kun 卡片"}, "zhHant": {"appName": "Comm Wakatte-kun 卡片", "languageLabel": "語言", "home": "首頁", "support": "支援", "privacy": "隱私權政策", "copyright": "© 2026 Comm Wakatte-kun 卡片"}, "ar": {"appName": "بطاقة Comm Wakatte-kun", "languageLabel": "اللغة", "home": "الرئيسية", "support": "الدعم", "privacy": "سياسة الخصوصية", "copyright": "© 2026 بطاقة Comm Wakatte-kun"}};
+    const TEXT = {"ja": {"title": "わかってくんカード", "lead": "聞こえにくい時や声で伝えにくい時に、相手へ見せるための会話カードをすばやく表示できるアプリです。", "featuresTitle": "主な機能", "features1": "緊急、病院、薬局、買い物、交通などの場面に合わせた定型文を表示できます。自由入力や音声認識を使って、その場で必要な内容を大きく見せることもできます。", "features2": "プレミアム機能を購入すると、お気に入り登録とカテゴリ内の並び替えを利用できます。", "linksTitle": "サポートとプライバシー", "linksText": "使い方、不具合、データの扱いについては、サポートページとプライバシーポリシーをご確認ください。"}, "en": {"title": "Comm Wakatte-kun Card", "lead": "An app that quickly shows conversation cards when hearing is difficult or speaking is not easy.", "featuresTitle": "Main Features", "features1": "Show ready-to-use phrases for emergencies, hospitals, pharmacies, shopping, transportation, and other situations. You can also use free text input or speech recognition to display what you need in large text.", "features2": "With the Premium Features purchase, you can register favorites and reorder phrases within categories.", "linksTitle": "Support and Privacy", "linksText": "For help, issue reports, and data handling information, please see the support page and privacy policy."}, "de": {"title": "Comm Wakatte-kun Karte", "lead": "Eine App, die Gesprächskarten schnell anzeigt, wenn Hören schwierig ist oder Sprechen nicht leichtfällt.", "featuresTitle": "Hauptfunktionen", "features1": "Zeigen Sie vorbereitete Sätze für Notfälle, Krankenhaus, Apotheke, Einkaufen, Verkehr und andere Situationen an. Mit freier Texteingabe oder Spracherkennung können Sie Inhalte auch groß anzeigen.", "features2": "Mit dem Kauf der Premium-Funktionen können Sie Favoriten speichern und Sätze innerhalb von Kategorien neu anordnen.", "linksTitle": "Support und Datenschutz", "linksText": "Hilfe, Fehlermeldungen und Informationen zum Umgang mit Daten finden Sie auf der Support-Seite und in der Datenschutzerklärung."}, "es": {"title": "Comm Wakatte-kun Card", "lead": "Una app que muestra rápidamente tarjetas de conversación cuando resulta difícil oír o hablar.", "featuresTitle": "Funciones principales", "features1": "Muestra frases preparadas para emergencias, hospitales, farmacias, compras, transporte y otras situaciones. También puedes usar texto libre o reconocimiento de voz para mostrar mensajes grandes.", "features2": "Con la compra de Funciones Premium, puedes guardar favoritos y reordenar frases dentro de las categorías.", "linksTitle": "Soporte y privacidad", "linksText": "Para ayuda, informes de errores e información sobre el uso de datos, consulta la página de soporte y la política de privacidad."}, "fr": {"title": "Comm Wakatte-kun Card", "lead": "Une app qui affiche rapidement des cartes de conversation lorsque entendre ou parler est difficile.", "featuresTitle": "Fonctions principales", "features1": "Affichez des phrases prêtes à l’emploi pour les urgences, l’hôpital, la pharmacie, les achats, les transports et d’autres situations. Vous pouvez aussi utiliser la saisie libre ou la reconnaissance vocale pour afficher un message en grand.", "features2": "Avec l’achat des fonctions Premium, vous pouvez enregistrer des favoris et réorganiser les phrases dans les catégories.", "linksTitle": "Assistance et confidentialité", "linksText": "Pour l’aide, les signalements de problème et les informations sur les données, consultez la page d’assistance et la politique de confidentialité."}, "it": {"title": "Comm Wakatte-kun Card", "lead": "Un’app che mostra rapidamente schede di conversazione quando sentire o parlare è difficile.", "featuresTitle": "Funzioni principali", "features1": "Mostra frasi pronte per emergenze, ospedale, farmacia, acquisti, trasporti e altre situazioni. Puoi anche usare input libero o riconoscimento vocale per mostrare il testo in grande.", "features2": "Con l’acquisto delle Funzioni Premium puoi salvare preferiti e riordinare le frasi nelle categorie.", "linksTitle": "Supporto e privacy", "linksText": "Per assistenza, segnalazioni e informazioni sul trattamento dei dati, consulta la pagina di supporto e l’informativa sulla privacy."}, "ko": {"title": "Comm Wakatte-kun 카드", "lead": "듣기 어렵거나 말하기 어려울 때 상대에게 보여 줄 대화 카드를 빠르게 표시하는 앱입니다.", "featuresTitle": "주요 기능", "features1": "응급, 병원, 약국, 쇼핑, 교통 등 상황별 정형 문구를 표시할 수 있습니다. 자유 입력이나 음성 인식을 사용해 필요한 내용을 큰 글자로 보여 줄 수도 있습니다.", "features2": "프리미엄 기능을 구매하면 즐겨찾기 등록과 카테고리 안의 문구 순서 변경을 사용할 수 있습니다.", "linksTitle": "지원 및 개인정보", "linksText": "사용 방법, 오류 신고, 데이터 처리에 관한 내용은 지원 페이지와 개인정보 처리방침을 확인해 주세요."}, "ru": {"title": "Карточка Comm Wakatte-kun", "lead": "Приложение быстро показывает карточки для общения, когда трудно слышать или говорить.", "featuresTitle": "Основные функции", "features1": "Показывайте готовые фразы для экстренных случаев, больницы, аптеки, покупок, транспорта и других ситуаций. Также можно вводить текст вручную или использовать распознавание речи для крупного отображения сообщения.", "features2": "Покупка Premium открывает избранное и изменение порядка фраз внутри категорий.", "linksTitle": "Поддержка и конфиденциальность", "linksText": "Справку, сообщения об ошибках и информацию об обработке данных смотрите на странице поддержки и в политике конфиденциальности."}, "tr": {"title": "Comm Wakatte-kun Kartı", "lead": "Duymak zor olduğunda veya konuşmak kolay olmadığında konuşma kartlarını hızlıca gösteren bir uygulama.", "featuresTitle": "Başlıca Özellikler", "features1": "Acil durum, hastane, eczane, alışveriş, ulaşım ve diğer durumlar için hazır ifadeleri gösterebilirsiniz. Serbest metin veya ses tanıma ile gereken içeriği büyük yazıyla da gösterebilirsiniz.", "features2": "Premium Özellikler satın alındığında favoriler ve kategoriler içinde ifade sıralama açılır.", "linksTitle": "Destek ve Gizlilik", "linksText": "Yardım, hata bildirimi ve veri kullanımı hakkında bilgi için destek sayfasına ve gizlilik politikasına bakın."}, "yue": {"title": "Comm Wakatte-kun 卡片", "lead": "當聽唔清楚或者唔方便講嘢時，可以快速顯示畀對方睇嘅溝通卡片。", "featuresTitle": "主要功能", "features1": "可以顯示緊急、醫院、藥房、購物、交通等情境嘅常用句。亦可以用自由輸入或語音識別，將需要嘅內容放大顯示。", "features2": "購買 Premium 功能後，可以使用收藏同分類內句子排序。", "linksTitle": "支援同私隱", "linksText": "使用方法、問題回報同資料處理方式，請睇支援頁同私隱政策。"}, "zhHans": {"title": "Comm Wakatte-kun 卡片", "lead": "在听不清或不方便说话时，可快速显示给对方看的沟通卡片。", "featuresTitle": "主要功能", "features1": "可显示紧急、医院、药房、购物、交通等场景的常用语。也可以使用自由输入或语音识别，将需要的内容以大字显示。", "features2": "购买高级功能后，可以使用收藏和分类内短语排序。", "linksTitle": "支持与隐私", "linksText": "关于使用方法、问题反馈和数据处理，请查看支持页面和隐私政策。"}, "zhHant": {"title": "Comm Wakatte-kun 卡片", "lead": "在聽不清楚或不方便說話時，可快速顯示給對方看的溝通卡片。", "featuresTitle": "主要功能", "features1": "可顯示緊急、醫院、藥局、購物、交通等場景的常用語。也可以使用自由輸入或語音辨識，將需要的內容以大字顯示。", "features2": "購買進階功能後，可以使用收藏和分類內短語排序。", "linksTitle": "支援與隱私", "linksText": "關於使用方法、問題回報和資料處理，請查看支援頁面與隱私權政策。"}, "ar": {"title": "بطاقة Comm Wakatte-kun", "lead": "تطبيق يعرض بطاقات تواصل بسرعة عندما يكون السمع صعبًا أو عندما لا يكون الكلام سهلًا.", "featuresTitle": "الميزات الرئيسية", "features1": "يمكن عرض عبارات جاهزة للطوارئ والمستشفى والصيدلية والتسوق والمواصلات وغيرها. يمكن أيضًا استخدام الإدخال الحر أو التعرف على الكلام لعرض الرسالة بحجم كبير.", "features2": "عند شراء الميزات المميزة، يمكنك تسجيل العبارات المفضلة وإعادة ترتيب العبارات داخل الفئات.", "linksTitle": "الدعم والخصوصية", "linksText": "للمساعدة والإبلاغ عن المشكلات ومعلومات التعامل مع البيانات، يرجى مراجعة صفحة الدعم وسياسة الخصوصية."}};
+    const DEFAULT_LOCALE = "ja-JP";
+    const STORAGE_KEY = "wakattekun-site-language";
+
+    function normalizeLocale(locale) {
+      if (!locale) return DEFAULT_LOCALE;
+      const exact = LOCALES.find(item => item.code.toLowerCase() === locale.toLowerCase());
+      if (exact) return exact.code;
+      const language = locale.split("-")[0].toLowerCase();
+      const matched = LOCALES.find(item => item.code.toLowerCase().startsWith(language + "-"));
+      return matched ? matched.code : DEFAULT_LOCALE;
+    }
+
+    function currentLocale() {
+      const params = new URLSearchParams(window.location.search);
+      return normalizeLocale(params.get("lang") || localStorage.getItem(STORAGE_KEY) || navigator.language);
+    }
+
+    function setInternalLinks(locale) {
+      document.querySelectorAll("a[data-page]").forEach(link => {
+        link.href = `${link.dataset.page}?lang=${encodeURIComponent(locale)}`;
+      });
+    }
+
+    function applyLocale(locale, updateUrl) {
+      const code = normalizeLocale(locale);
+      const group = GROUPS[code] || "ja";
+      const dict = Object.assign({}, SHARED.ja, TEXT.ja, SHARED[group] || {}, TEXT[group] || {});
+      document.documentElement.lang = code;
+      document.documentElement.dir = group === "ar" ? "rtl" : "ltr";
+      document.title = dict.title === dict.appName ? dict.title : `${dict.title} | ${dict.appName}`;
+      document.querySelectorAll("[data-i18n]").forEach(element => {
+        const value = dict[element.dataset.i18n];
+        if (value) element.textContent = value;
+      });
+      const select = document.getElementById("language-select");
+      if (select) select.value = code;
+      setInternalLinks(code);
+      localStorage.setItem(STORAGE_KEY, code);
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.set("lang", code);
+        history.replaceState(null, "", url);
+      }
+    }
+
+    function setupLanguageSelect() {
+      const select = document.getElementById("language-select");
+      LOCALES.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.code;
+        option.textContent = item.label;
+        select.appendChild(option);
+      });
+      select.addEventListener("change", event => applyLocale(event.target.value, true));
+    }
+
+    setupLanguageSelect();
+    applyLocale(currentLocale(), !new URLSearchParams(window.location.search).get("lang"));
+  </script>
 </body>
 </html>

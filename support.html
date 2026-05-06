@@ -1,53 +1,129 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja-JP">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>サポート | わかってくんカード</title>
   <style>
-    :root { color-scheme: light dark; --accent: #0a84ff; --border: #d6d6d6; }
+    :root { color-scheme: light dark; --accent: #0a84ff; --border: #d6d6d6; --muted: color-mix(in srgb, CanvasText 68%, transparent); }
     body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans", sans-serif; line-height: 1.75; color: CanvasText; background: Canvas; }
-    main { max-width: 760px; margin: 0 auto; padding: 48px 20px; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 20px 48px; }
+    header { margin-bottom: 32px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .home-link { color: var(--accent); text-decoration: none; font-weight: 700; }
+    .language-control { display: flex; align-items: center; gap: 8px; font-size: .94rem; color: var(--muted); }
+    select { max-width: 240px; font: inherit; color: CanvasText; background: Canvas; border: 1px solid var(--border); border-radius: 10px; padding: 7px 10px; }
     h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 12px; }
-    h2 { font-size: 1.25rem; margin: 32px 0 8px; }
+    h2 { font-size: 1.25rem; margin: 0 0 8px; }
     p, li { margin-bottom: 12px; }
+    nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
     a { color: var(--accent); }
+    a.button { color: white; background: var(--accent); text-decoration: none; padding: 10px 14px; border-radius: 10px; font-weight: 700; }
     .card { border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-top: 20px; }
     footer { margin-top: 40px; font-size: .9rem; opacity: .72; }
+    html[dir="rtl"] .topbar { flex-direction: row-reverse; }
+    @media (max-width: 560px) { .topbar { align-items: flex-start; flex-direction: column; } html[dir="rtl"] .topbar { flex-direction: column; } select { max-width: 100%; } }
   </style>
 </head>
 <body>
   <main>
-    <p><a href="index.html">トップへ戻る</a></p>
-    <h1>サポート</h1>
-    <p>わかってくんカードの使い方、不具合、購入の復元に関する案内です。</p>
+    <div class="topbar">
+      <a class="home-link" href="index.html" data-page="index.html" data-i18n="back">トップへ戻る</a>
+      <label class="language-control"><span data-i18n="languageLabel">言語</span><select id="language-select" aria-label="Language"></select></label>
+    </div>
+    <h1 data-i18n="title">サポート</h1>
+    <p data-i18n="lead">わかってくんカードの使い方、不具合、購入の復元に関する案内です。</p>
 
     <section class="card">
-      <h2>よくある確認事項</h2>
+      <h2 data-i18n="faqTitle">よくある確認事項</h2>
       <ul>
-        <li>音声認識を使うには、マイクと音声認識の許可が必要です。</li>
-        <li>音声認識や翻訳は、端末、OS、選択した言語の対応状況によって利用できない場合があります。</li>
-        <li>プレミアム機能が反映されない場合は、アプリの設定画面または購入画面から「購入を復元」をお試しください。</li>
-        <li>作成したカードは端末内に保存されます。別の端末へ自動同期されません。</li>
+        <li data-i18n="faq1">音声認識を使うには、マイクと音声認識の許可が必要です。</li>
+        <li data-i18n="faq2">音声認識や翻訳は、端末、OS、選択した言語の対応状況によって利用できない場合があります。</li>
+        <li data-i18n="faq3">プレミアム機能が反映されない場合は、アプリの設定画面または購入画面から「購入を復元」をお試しください。</li>
+        <li data-i18n="faq4">作成したカードは端末内に保存されます。別の端末へ自動同期されません。</li>
       </ul>
     </section>
 
     <section class="card">
-      <h2>お問い合わせ</h2>
-      <p>不具合報告やサポート依頼は、以下のGitHub Issuesからご連絡ください。</p>
-      <p><a href="https://github.com/kondofumikazu-cmd/wakattekun-card/issues">GitHub Issuesを開く</a></p>
-      <p>お問い合わせ時は、端末名、iOSバージョン、発生した画面、再現手順を添えていただくと確認しやすくなります。</p>
+      <h2 data-i18n="contactTitle">お問い合わせ</h2>
+      <p data-i18n="contact1">不具合報告やサポート依頼は、以下のGitHub Issuesからご連絡ください。</p>
+      <p><a href="https://github.com/kondofumikazu-cmd/wakattekun-card/issues" data-i18n="issues">GitHub Issuesを開く</a></p>
+      <p data-i18n="contact2">お問い合わせ時は、端末名、iOSバージョン、発生した画面、再現手順を添えていただくと確認しやすくなります。</p>
     </section>
 
     <section class="card">
-      <h2>医療に関する注意</h2>
-      <p>このアプリは診断、治療、医療助言を目的としたものではありません。病院、薬局、緊急、アレルギーなどの文例は、相手に状況を伝えるための補助的な会話文です。</p>
+      <h2 data-i18n="medicalTitle">医療に関する注意</h2>
+      <p data-i18n="medical">このアプリは診断、治療、医療助言を目的としたものではありません。病院、薬局、緊急、アレルギーなどの文例は、相手に状況を伝えるための補助的な会話文です。</p>
     </section>
 
     <footer>
-      <p><a href="privacy.html">プライバシーポリシー</a></p>
-      <p>&copy; 2026 わかってくんカード</p>
+      <p><a href="privacy.html" data-page="privacy.html" data-i18n="privacy">プライバシーポリシー</a></p>
+      <p data-i18n="copyright">© 2026 わかってくんカード</p>
     </footer>
   </main>
+  <script>
+    const LOCALES = [{"code": "ja-JP", "label": "日本語"}, {"code": "en-US", "label": "English (United States)"}, {"code": "en-GB", "label": "English (United Kingdom)"}, {"code": "en-AU", "label": "English (Australia)"}, {"code": "en-CA", "label": "English (Canada)"}, {"code": "en-IN", "label": "English (India)"}, {"code": "en-SG", "label": "English (Singapore)"}, {"code": "de-DE", "label": "Deutsch (Deutschland)"}, {"code": "es-ES", "label": "Español (España)"}, {"code": "es-MX", "label": "Español (México)"}, {"code": "es-US", "label": "Español (Estados Unidos)"}, {"code": "fr-FR", "label": "Français (France)"}, {"code": "it-IT", "label": "Italiano (Italia)"}, {"code": "ko-KR", "label": "한국어 (대한민국)"}, {"code": "ru-RU", "label": "Русский (Россия)"}, {"code": "tr-TR", "label": "Türkçe (Türkiye)"}, {"code": "yue-CN", "label": "粵語（中國大陸）"}, {"code": "zh-CN", "label": "简体中文（中国大陆）"}, {"code": "zh-HK", "label": "繁體中文（香港）"}, {"code": "zh-TW", "label": "繁體中文（台灣）"}, {"code": "ar-SA", "label": "العربية (السعودية)"}];
+    const GROUPS = {"ja-JP": "ja", "en-US": "en", "en-GB": "en", "en-AU": "en", "en-CA": "en", "en-IN": "en", "en-SG": "en", "de-DE": "de", "es-ES": "es", "es-MX": "es", "es-US": "es", "fr-FR": "fr", "it-IT": "it", "ko-KR": "ko", "ru-RU": "ru", "tr-TR": "tr", "yue-CN": "yue", "zh-CN": "zhHans", "zh-HK": "zhHant", "zh-TW": "zhHant", "ar-SA": "ar"};
+    const SHARED = {"ja": {"appName": "わかってくんカード", "languageLabel": "言語", "home": "トップ", "support": "サポート", "privacy": "プライバシーポリシー", "copyright": "© 2026 わかってくんカード"}, "en": {"appName": "Comm Wakatte-kun Card", "languageLabel": "Language", "home": "Home", "support": "Support", "privacy": "Privacy Policy", "copyright": "© 2026 Comm Wakatte-kun Card"}, "de": {"appName": "Comm Wakatte-kun Karte", "languageLabel": "Sprache", "home": "Startseite", "support": "Support", "privacy": "Datenschutzerklärung", "copyright": "© 2026 Comm Wakatte-kun Karte"}, "es": {"appName": "Comm Wakatte-kun Card", "languageLabel": "Idioma", "home": "Inicio", "support": "Soporte", "privacy": "Política de privacidad", "copyright": "© 2026 Comm Wakatte-kun Card"}, "fr": {"appName": "Comm Wakatte-kun Card", "languageLabel": "Langue", "home": "Accueil", "support": "Assistance", "privacy": "Politique de confidentialité", "copyright": "© 2026 Comm Wakatte-kun Card"}, "it": {"appName": "Comm Wakatte-kun Card", "languageLabel": "Lingua", "home": "Home", "support": "Supporto", "privacy": "Informativa sulla privacy", "copyright": "© 2026 Comm Wakatte-kun Card"}, "ko": {"appName": "Comm Wakatte-kun 카드", "languageLabel": "언어", "home": "홈", "support": "지원", "privacy": "개인정보 처리방침", "copyright": "© 2026 Comm Wakatte-kun 카드"}, "ru": {"appName": "Карточка Comm Wakatte-kun", "languageLabel": "Язык", "home": "Главная", "support": "Поддержка", "privacy": "Политика конфиденциальности", "copyright": "© 2026 Карточка Comm Wakatte-kun"}, "tr": {"appName": "Comm Wakatte-kun Kartı", "languageLabel": "Dil", "home": "Ana sayfa", "support": "Destek", "privacy": "Gizlilik Politikası", "copyright": "© 2026 Comm Wakatte-kun Kartı"}, "yue": {"appName": "Comm Wakatte-kun 卡片", "languageLabel": "語言", "home": "主頁", "support": "支援", "privacy": "私隱政策", "copyright": "© 2026 Comm Wakatte-kun 卡片"}, "zhHans": {"appName": "Comm Wakatte-kun 卡片", "languageLabel": "语言", "home": "首页", "support": "支持", "privacy": "隐私政策", "copyright": "© 2026 Comm Wakatte-kun 卡片"}, "zhHant": {"appName": "Comm Wakatte-kun 卡片", "languageLabel": "語言", "home": "首頁", "support": "支援", "privacy": "隱私權政策", "copyright": "© 2026 Comm Wakatte-kun 卡片"}, "ar": {"appName": "بطاقة Comm Wakatte-kun", "languageLabel": "اللغة", "home": "الرئيسية", "support": "الدعم", "privacy": "سياسة الخصوصية", "copyright": "© 2026 بطاقة Comm Wakatte-kun"}};
+    const TEXT = {"ja": {"title": "サポート", "lead": "わかってくんカードの使い方、不具合、購入の復元に関する案内です。", "back": "トップへ戻る", "faqTitle": "よくある確認事項", "faq1": "音声認識を使うには、マイクと音声認識の許可が必要です。", "faq2": "音声認識や翻訳は、端末、OS、選択した言語の対応状況によって利用できない場合があります。", "faq3": "プレミアム機能が反映されない場合は、アプリの設定画面または購入画面から「購入を復元」をお試しください。", "faq4": "作成したカードは端末内に保存されます。別の端末へ自動同期されません。", "contactTitle": "お問い合わせ", "contact1": "不具合報告やサポート依頼は、以下のGitHub Issuesからご連絡ください。", "issues": "GitHub Issuesを開く", "contact2": "お問い合わせ時は、端末名、iOSバージョン、発生した画面、再現手順を添えていただくと確認しやすくなります。", "medicalTitle": "医療に関する注意", "medical": "このアプリは診断、治療、医療助言を目的としたものではありません。病院、薬局、緊急、アレルギーなどの文例は、相手に状況を伝えるための補助的な会話文です。"}, "en": {"title": "Support", "lead": "Information about using Comm Wakatte-kun Card, reporting issues, and restoring purchases.", "back": "Back to Home", "faqTitle": "Common Checks", "faq1": "Microphone and Speech Recognition permissions are required to use speech recognition.", "faq2": "Speech recognition and translation may be unavailable depending on the device, OS, and selected language.", "faq3": "If Premium Features are not reflected, please try Restore Purchases from Settings or the purchase screen.", "faq4": "Cards you create are stored on the device and are not automatically synced to another device.", "contactTitle": "Contact", "contact1": "For issue reports or support requests, please contact us through GitHub Issues below.", "issues": "Open GitHub Issues", "contact2": "When contacting support, please include the device name, iOS version, screen where the issue occurred, and steps to reproduce it.", "medicalTitle": "Medical Notice", "medical": "This app is not intended for diagnosis, treatment, or medical advice. Medical, pharmacy, emergency, and allergy phrases are simple conversation aids for showing your situation to another person."}, "de": {"title": "Support", "lead": "Informationen zur Nutzung, zu Problemen und zur Wiederherstellung von Käufen.", "back": "Zur Startseite", "faqTitle": "Häufige Prüfungen", "faq1": "Für die Spracherkennung sind Mikrofon- und Spracherkennungsberechtigungen erforderlich.", "faq2": "Spracherkennung und Übersetzung können je nach Gerät, OS und Sprache nicht verfügbar sein.", "faq3": "Wenn Premium-Funktionen nicht aktiv sind, versuchen Sie in den Einstellungen oder im Kaufbildschirm „Käufe wiederherstellen“.", "faq4": "Erstellte Karten werden auf dem Gerät gespeichert und nicht automatisch mit anderen Geräten synchronisiert.", "contactTitle": "Kontakt", "contact1": "Für Fehlermeldungen oder Supportanfragen nutzen Sie bitte GitHub Issues.", "issues": "GitHub Issues öffnen", "contact2": "Bitte nennen Sie Gerät, iOS-Version, betroffenen Bildschirm und Schritte zur Reproduktion.", "medicalTitle": "Medizinischer Hinweis", "medical": "Diese App ist nicht für Diagnose, Behandlung oder medizinische Beratung bestimmt. Medizin-, Apotheken-, Notfall- und Allergiesätze sind einfache Kommunikationshilfen."}, "es": {"title": "Soporte", "lead": "Información sobre el uso de la app, problemas y restauración de compras.", "back": "Volver al inicio", "faqTitle": "Comprobaciones frecuentes", "faq1": "Para usar el reconocimiento de voz se requieren permisos de micrófono y reconocimiento de voz.", "faq2": "El reconocimiento de voz y la traducción pueden no estar disponibles según el dispositivo, el sistema operativo y el idioma elegido.", "faq3": "Si las Funciones Premium no aparecen activas, prueba Restaurar compras desde Ajustes o desde la pantalla de compra.", "faq4": "Las tarjetas creadas se guardan en el dispositivo y no se sincronizan automáticamente con otros dispositivos.", "contactTitle": "Contacto", "contact1": "Para informar problemas o solicitar soporte, usa GitHub Issues.", "issues": "Abrir GitHub Issues", "contact2": "Incluye el modelo del dispositivo, versión de iOS, pantalla afectada y pasos para reproducir el problema.", "medicalTitle": "Aviso médico", "medical": "Esta app no está destinada a diagnóstico, tratamiento ni consejo médico. Las frases médicas, de farmacia, emergencia y alergias son ayudas simples de comunicación."}, "fr": {"title": "Assistance", "lead": "Informations sur l’utilisation de l’app, les problèmes et la restauration des achats.", "back": "Retour à l’accueil", "faqTitle": "Vérifications courantes", "faq1": "Les autorisations Microphone et Reconnaissance vocale sont nécessaires.", "faq2": "La reconnaissance vocale et la traduction peuvent être indisponibles selon l’appareil, l’OS et la langue choisie.", "faq3": "Si les fonctions Premium ne sont pas activées, essayez Restaurer les achats dans les réglages ou l’écran d’achat.", "faq4": "Les cartes créées sont stockées sur l’appareil et ne sont pas synchronisées automatiquement.", "contactTitle": "Contact", "contact1": "Pour signaler un problème ou demander de l’aide, utilisez GitHub Issues.", "issues": "Ouvrir GitHub Issues", "contact2": "Indiquez l’appareil, la version d’iOS, l’écran concerné et les étapes de reproduction.", "medicalTitle": "Avis médical", "medical": "Cette app n’est pas destinée au diagnostic, au traitement ni aux conseils médicaux. Les phrases médicales, pharmacie, urgence et allergie sont de simples aides de communication."}, "it": {"title": "Supporto", "lead": "Informazioni sull’uso dell’app, segnalazione problemi e ripristino acquisti.", "back": "Torna alla home", "faqTitle": "Controlli comuni", "faq1": "Per usare il riconoscimento vocale servono i permessi Microfono e Riconoscimento vocale.", "faq2": "Riconoscimento vocale e traduzione possono non essere disponibili in base a dispositivo, OS e lingua scelta.", "faq3": "Se le Funzioni Premium non risultano attive, prova Ripristina acquisti dalle impostazioni o dalla schermata di acquisto.", "faq4": "Le schede create sono salvate sul dispositivo e non vengono sincronizzate automaticamente.", "contactTitle": "Contatto", "contact1": "Per segnalazioni o richieste di supporto, usa GitHub Issues.", "issues": "Apri GitHub Issues", "contact2": "Includi dispositivo, versione iOS, schermata interessata e passaggi per riprodurre il problema.", "medicalTitle": "Avviso medico", "medical": "Questa app non è destinata a diagnosi, trattamento o consigli medici. Le frasi mediche, farmacia, emergenza e allergie sono semplici aiuti alla comunicazione."}, "ko": {"title": "지원", "lead": "앱 사용법, 문제 신고, 구매 복원에 관한 안내입니다.", "back": "홈으로 돌아가기", "faqTitle": "자주 확인할 사항", "faq1": "음성 인식을 사용하려면 마이크와 음성 인식 권한이 필요합니다.", "faq2": "음성 인식과 번역은 기기, OS, 선택한 언어 지원 상태에 따라 사용할 수 없을 수 있습니다.", "faq3": "프리미엄 기능이 반영되지 않으면 설정 또는 구매 화면에서 구매 복원을 시도해 주세요.", "faq4": "작성한 카드는 기기 안에 저장되며 다른 기기로 자동 동기화되지 않습니다.", "contactTitle": "문의", "contact1": "오류 신고나 지원 요청은 아래 GitHub Issues로 연락해 주세요.", "issues": "GitHub Issues 열기", "contact2": "문의 시 기기명, iOS 버전, 문제가 발생한 화면, 재현 절차를 알려 주시면 확인하기 쉽습니다.", "medicalTitle": "의료 관련 안내", "medical": "이 앱은 진단, 치료 또는 의료 조언을 목적으로 하지 않습니다. 병원, 약국, 응급, 알레르기 문구는 상황 전달을 돕는 간단한 대화 문구입니다."}, "ru": {"title": "Поддержка", "lead": "Информация об использовании приложения, ошибках и восстановлении покупок.", "back": "На главную", "faqTitle": "Частые проверки", "faq1": "Для распознавания речи нужны разрешения на микрофон и распознавание речи.", "faq2": "Распознавание речи и перевод могут быть недоступны в зависимости от устройства, OS и выбранного языка.", "faq3": "Если Premium не активирован, попробуйте восстановить покупки в настройках или на экране покупки.", "faq4": "Созданные карточки сохраняются на устройстве и не синхронизируются автоматически.", "contactTitle": "Контакт", "contact1": "Для сообщений об ошибках и запросов поддержки используйте GitHub Issues.", "issues": "Открыть GitHub Issues", "contact2": "Укажите устройство, версию iOS, экран с проблемой и шаги воспроизведения.", "medicalTitle": "Медицинское уведомление", "medical": "Приложение не предназначено для диагностики, лечения или медицинских советов. Фразы о медицине, аптеке, экстренных случаях и аллергии помогают просто сообщить ситуацию другому человеку."}, "tr": {"title": "Destek", "lead": "Uygulama kullanımı, sorun bildirme ve satın alma geri yükleme bilgileri.", "back": "Ana sayfaya dön", "faqTitle": "Sık Kontroller", "faq1": "Ses tanıma için Mikrofon ve Ses Tanıma izinleri gerekir.", "faq2": "Ses tanıma ve çeviri cihaz, OS ve seçilen dile göre kullanılamayabilir.", "faq3": "Premium Özellikler görünmüyorsa Ayarlar veya satın alma ekranından Satın Almaları Geri Yükle’yi deneyin.", "faq4": "Oluşturduğunuz kartlar cihazda saklanır ve başka cihaza otomatik eşitlenmez.", "contactTitle": "İletişim", "contact1": "Sorun bildirimi veya destek için GitHub Issues üzerinden ulaşın.", "issues": "GitHub Issues aç", "contact2": "Cihaz adı, iOS sürümü, sorunun olduğu ekran ve tekrar adımlarını ekleyin.", "medicalTitle": "Tıbbi Uyarı", "medical": "Bu uygulama tanı, tedavi veya tıbbi tavsiye amacı taşımaz. Tıbbi, eczane, acil durum ve alerji ifadeleri yalnızca iletişime yardımcı kısa ifadelerdir."}, "yue": {"title": "支援", "lead": "關於使用方法、問題回報同購買復原嘅資訊。", "back": "返主頁", "faqTitle": "常見確認事項", "faq1": "使用語音識別需要允許咪高峰同語音識別。", "faq2": "語音識別同翻譯可能會因裝置、OS 同所選語言而未能使用。", "faq3": "如果 Premium 功能未反映，請喺設定或購買畫面試下「復原購買」。", "faq4": "你建立嘅卡片會儲存在裝置內，唔會自動同步到其他裝置。", "contactTitle": "聯絡", "contact1": "如要回報問題或尋求支援，請使用以下 GitHub Issues。", "issues": "開啟 GitHub Issues", "contact2": "聯絡時請提供裝置名稱、iOS 版本、發生問題嘅畫面同重現步驟。", "medicalTitle": "醫療注意事項", "medical": "此 app 唔係用作診斷、治療或醫療建議。醫院、藥房、緊急同過敏等句子，只係協助你向對方表達情況。"}, "zhHans": {"title": "支持", "lead": "关于应用使用、问题反馈和购买恢复的说明。", "back": "返回首页", "faqTitle": "常见确认事项", "faq1": "使用语音识别需要授予麦克风和语音识别权限。", "faq2": "语音识别和翻译可能会因设备、OS 和所选语言的支持情况而无法使用。", "faq3": "如果高级功能没有生效，请在设置或购买页面尝试“恢复购买”。", "faq4": "创建的卡片会保存在设备内，不会自动同步到其他设备。", "contactTitle": "联系我们", "contact1": "如需报告问题或请求支持，请通过以下 GitHub Issues 联系。", "issues": "打开 GitHub Issues", "contact2": "联系时请提供设备名称、iOS 版本、发生问题的页面和复现步骤。", "medicalTitle": "医疗相关注意", "medical": "本应用不用于诊断、治疗或医疗建议。医院、药房、紧急和过敏等短语只是用于向他人说明情况的辅助沟通语句。"}, "zhHant": {"title": "支援", "lead": "關於應用程式使用、問題回報與購買復原的說明。", "back": "返回首頁", "faqTitle": "常見確認事項", "faq1": "使用語音辨識需要授予麥克風與語音辨識權限。", "faq2": "語音辨識與翻譯可能會因裝置、OS 和所選語言的支援狀況而無法使用。", "faq3": "如果進階功能沒有生效，請在設定或購買畫面嘗試「恢復購買」。", "faq4": "建立的卡片會儲存在裝置內，不會自動同步到其他裝置。", "contactTitle": "聯絡我們", "contact1": "如需回報問題或請求支援，請透過以下 GitHub Issues 聯絡。", "issues": "開啟 GitHub Issues", "contact2": "聯絡時請提供裝置名稱、iOS 版本、發生問題的畫面與重現步驟。", "medicalTitle": "醫療相關注意", "medical": "本應用程式不作為診斷、治療或醫療建議用途。醫院、藥局、緊急和過敏等短語只是用於向他人說明情況的輔助溝通語句。"}, "ar": {"title": "الدعم", "lead": "معلومات عن استخدام التطبيق والإبلاغ عن المشكلات واستعادة المشتريات.", "back": "العودة إلى الرئيسية", "faqTitle": "فحوصات شائعة", "faq1": "يلزم السماح بالميكروفون والتعرف على الكلام لاستخدام التعرف على الكلام.", "faq2": "قد لا يتوفر التعرف على الكلام أو الترجمة حسب الجهاز ونظام التشغيل واللغة المختارة.", "faq3": "إذا لم تظهر الميزات المميزة، جرّب استعادة المشتريات من الإعدادات أو شاشة الشراء.", "faq4": "تُحفظ البطاقات التي تنشئها على الجهاز ولا تتم مزامنتها تلقائيًا مع جهاز آخر.", "contactTitle": "التواصل", "contact1": "للإبلاغ عن مشكلة أو طلب دعم، يرجى استخدام GitHub Issues أدناه.", "issues": "فتح GitHub Issues", "contact2": "يرجى ذكر اسم الجهاز وإصدار iOS والشاشة التي حدثت فيها المشكلة وخطوات إعادة إنتاجها.", "medicalTitle": "تنبيه طبي", "medical": "هذا التطبيق غير مخصص للتشخيص أو العلاج أو تقديم المشورة الطبية. عبارات المستشفى والصيدلية والطوارئ والحساسية هي وسائل مساعدة بسيطة للتواصل."}};
+    const DEFAULT_LOCALE = "ja-JP";
+    const STORAGE_KEY = "wakattekun-site-language";
+
+    function normalizeLocale(locale) {
+      if (!locale) return DEFAULT_LOCALE;
+      const exact = LOCALES.find(item => item.code.toLowerCase() === locale.toLowerCase());
+      if (exact) return exact.code;
+      const language = locale.split("-")[0].toLowerCase();
+      const matched = LOCALES.find(item => item.code.toLowerCase().startsWith(language + "-"));
+      return matched ? matched.code : DEFAULT_LOCALE;
+    }
+
+    function currentLocale() {
+      const params = new URLSearchParams(window.location.search);
+      return normalizeLocale(params.get("lang") || localStorage.getItem(STORAGE_KEY) || navigator.language);
+    }
+
+    function setInternalLinks(locale) {
+      document.querySelectorAll("a[data-page]").forEach(link => {
+        link.href = `${link.dataset.page}?lang=${encodeURIComponent(locale)}`;
+      });
+    }
+
+    function applyLocale(locale, updateUrl) {
+      const code = normalizeLocale(locale);
+      const group = GROUPS[code] || "ja";
+      const dict = Object.assign({}, SHARED.ja, TEXT.ja, SHARED[group] || {}, TEXT[group] || {});
+      document.documentElement.lang = code;
+      document.documentElement.dir = group === "ar" ? "rtl" : "ltr";
+      document.title = dict.title === dict.appName ? dict.title : `${dict.title} | ${dict.appName}`;
+      document.querySelectorAll("[data-i18n]").forEach(element => {
+        const value = dict[element.dataset.i18n];
+        if (value) element.textContent = value;
+      });
+      const select = document.getElementById("language-select");
+      if (select) select.value = code;
+      setInternalLinks(code);
+      localStorage.setItem(STORAGE_KEY, code);
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.set("lang", code);
+        history.replaceState(null, "", url);
+      }
+    }
+
+    function setupLanguageSelect() {
+      const select = document.getElementById("language-select");
+      LOCALES.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.code;
+        option.textContent = item.label;
+        select.appendChild(option);
+      });
+      select.addEventListener("change", event => applyLocale(event.target.value, true));
+    }
+
+    setupLanguageSelect();
+    applyLocale(currentLocale(), !new URLSearchParams(window.location.search).get("lang"));
+  </script>
 </body>
 </html>
